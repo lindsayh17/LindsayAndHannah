@@ -38,10 +38,18 @@ while running:
     if keys[pygame.K_RIGHT]:
         snake_x += 5
 
-    square = pygame.Rect(snake_x, snake_y, 5, 5)
+    snake = pygame.Rect(snake_x, snake_y, 5, 5)
+    pygame.draw.rect(game_window, (0,0,0), snake)
 
     if snake_x > window_x or snake_y > window_y:
         running = False
 
+    for event in pygame.event.get():
+        # Check if the user closes the window
+        if event.type == pygame.QUIT:
+            running = False
+
     # Refresh game screen
     pygame.display.flip()
+
+pygame.quit()
