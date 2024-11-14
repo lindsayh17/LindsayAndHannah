@@ -27,7 +27,7 @@ running = True
 direction = "RIGHT"
 snake_x = 100
 snake_y = 100
-current_snake = [[snake_x, snake_y]]
+current_snake = [[snake_x - 7, snake_y - 7], [snake_x, snake_y] ]
 
 # food dimensions
 food_radius = 5
@@ -46,8 +46,6 @@ while running:
         direction = "LEFT"
     if keys[pygame.K_RIGHT]:
         direction = "RIGHT"
-    if keys[pygame.K_g]:
-        current_snake.insert(0, [snake_x - 7, snake_y])
 
 
     if direction == "UP":
@@ -60,16 +58,19 @@ while running:
         snake_x += 5
 
     prev_snake = current_snake
-    current_snake = [snake_x, snake_y]
 
-    snake = pygame.Rect(current_snake[0], current_snake[1], 7, 7)
-    pygame.draw.rect(game_window, (255,0,0), snake)
+    current_snake.append([snake_x - 7, snake_y - 7])
+
+    for x in current_snake:
+        snake = pygame.Rect(x[0], x[1], 7, 7)
+        pygame.draw.rect(game_window, (255, 0, 0), snake)
 
     current_snake.pop()
 
     # gets rid of snake body by setting it to the background color
-    # previous_snake = pygame.Rect(prev_snake[0], prev_snake[1], 7, 7)
-    # pygame.draw.rect(game_window, (0,0,0), previous_snake)
+    for x in current_snake:
+        snake = pygame.Rect(x[0], x[1], 7, 7)
+        pygame.draw.rect(game_window, (0, 0, 0), snake)
 
     # TODO: let it get longer
 
