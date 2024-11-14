@@ -58,6 +58,7 @@ while running:
     snake = pygame.Rect(current_snake[0], current_snake[1], 5, 5)
     pygame.draw.rect(game_window, (255,0,0), snake)
 
+    # gets rid of snake body by setting it to the background color
     previous_snake = pygame.Rect(prev_snake[0], prev_snake[1], 5, 5)
     pygame.draw.rect(game_window, (0,0,0), previous_snake)
 
