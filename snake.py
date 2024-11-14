@@ -29,6 +29,12 @@ snake_x = 100
 snake_y = 100
 current_snake = [snake_x, snake_y]
 
+# food dimensions
+food_radius = 5
+
+# flag if there is no food on screen so another one will spawn in
+food_available = False
+
 # Main Function
 while running:
 
@@ -74,7 +80,11 @@ while running:
     # TODO: display score
 
     # TODO: things to eat
-
+    # have 'food' randomly appear within the bounds of the walls
+    # initialize food object
+    if not food_available:
+        pygame.draw.circle(game_window, (0,255,0), (random.randint(0, window_x), random.randint(0, window_y)), food_radius)
+        food_available = True
     # TODO: increment score when eat the things
 
 
