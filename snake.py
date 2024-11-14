@@ -27,6 +27,7 @@ running = True
 direction = "RIGHT"
 snake_x = 100
 snake_y = 100
+current_snake = [snake_x, snake_y]
 
 # Main Function
 while running:
@@ -51,10 +52,17 @@ while running:
     if direction == "RIGHT":
         snake_x += 5
 
-    snake = pygame.Rect(snake_x, snake_y, 5, 5)
+    prev_snake = current_snake
+    current_snake = [snake_x, snake_y]
+
+    snake = pygame.Rect(current_snake[0], current_snake[1], 5, 5)
     pygame.draw.rect(game_window, (255,0,0), snake)
 
+    previous_snake = pygame.Rect(prev_snake[0], prev_snake[1], 5, 5)
+    pygame.draw.rect(game_window, (0,0,0), previous_snake)
+
     # TODO: get rid of snake body or let it get longer
+
 
     # set up bounds for walls
     if snake_y < 0 or snake_y > window_y or snake_x > window_x or snake_x < 0:
