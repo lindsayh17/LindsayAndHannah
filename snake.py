@@ -56,9 +56,18 @@ while running:
 
     # TODO: get rid of snake body or let it get longer
 
+    # set up bounds for walls
+    if snake_y < 0 or snake_y > window_y or snake_x > window_x or snake_x < 0:
+        running = False
+
+    # TODO: set up bounds for snake itself
+
     # TODO: display score
 
-    # TODO: set up bounds for walls (and maybe snake itself - store in an array?)
+    # TODO: things to eat
+
+    # TODO: increment score when eat the things
+
 
     for event in pygame.event.get():
         # Check if the user closes the window
@@ -68,5 +77,7 @@ while running:
     # Refresh game screen
     pygame.display.flip()
     clock.tick(30)
+
+# TODO: end screen
 
 pygame.quit()
