@@ -76,7 +76,7 @@ while running:
     pygame.draw.rect(game_window, (0, 255, 0), pygame.Rect(
         food_position[0], food_position[1], food_size, food_size))
 
-    # TODO: increment score when eat the things
+    # increment score when eat the things
     if food_position[0] == current_snake[0][0] and food_position[1] == current_snake[0][1]:
         score += 1
         food_available = False
@@ -110,7 +110,7 @@ while running:
 
 
 
-    # TODO: display score
+    # display score
     scoreText = font.render(f"Score: {score}", True, (152, 108, 106))
     game_window.blit(scoreText, (10, 10))
 
@@ -124,6 +124,21 @@ while running:
     pygame.display.update()
     clock.tick(15)
 
-# TODO: end screen
+# end screen
+
+game_window.fill((34, 46, 80))
+
+endText = font.render("Game Over", True, (152, 108, 106))
+
+game_window.blit(endText, (window_x // 2 - endText.get_width() // 2, window_y // 2 - 30))
+
+finalScoreText = font.render(f"Score: {score}", True, (152, 108, 106))
+
+game_window.blit(finalScoreText, (window_x // 2
+                        - finalScoreText.get_width() // 2, window_y // 2 + 10))
+
+pygame.display.flip()
+time.sleep(10)
+pygame.quit()
 
 pygame.quit()
