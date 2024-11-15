@@ -38,8 +38,8 @@ current_snake = [[100-28, 100],
 # food dimensions
 food_size = 10
 food_available = False
-food_position = [random.randrange(1, (window_x//10)) * 10,
-                  random.randrange(1, (window_y//10)) * 10]
+food_position = [random.randrange(food_size, (window_x//10)) * 10,
+                  random.randrange(food_size, (window_y//10)) * 10]
 
 # Main Function
 while running:
@@ -57,13 +57,13 @@ while running:
 
 
     if direction == "UP":
-        snake_y -= 7
+        snake_y -= 10
     if direction == "DOWN":
-        snake_y += 7
+        snake_y += 10
     if direction == "LEFT":
-        snake_x -= 7
+        snake_x -= 10
     if direction == "RIGHT":
-        snake_x += 7
+        snake_x += 10
 
 
     # let it get longer
@@ -80,15 +80,15 @@ while running:
     else:
         current_snake.pop()
     if not food_available:
-        food_position = [random.randrange(1, (window_x // 10)) * 10,
-                         random.randrange(1, (window_y // 10)) * 10]
+        food_position = [random.randrange(food_size, (window_x // 10)) * 10,
+                         random.randrange(food_size, (window_y // 10)) * 10]
     food_available = True
 
     game_window.fill((0, 0, 0))
 
     # redraw snake
     for x in current_snake:
-        snake = pygame.Rect(x[0], x[1], 7, 7)
+        snake = pygame.Rect(x[0], x[1], 10, 10)
         pygame.draw.rect(game_window, (255, 0, 0), snake)
 
     # new food
