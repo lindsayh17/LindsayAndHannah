@@ -82,9 +82,9 @@ while running:
     current_snake.pop()
 
     # function
-
-    circle = spawn_food()
-    pygame.draw.circle(game_window, (0, 255, 0), circle.center, food_radius)
+    if not food_available:
+        circle = spawn_food()
+        pygame.draw.circle(game_window, (0, 255, 0), circle.center, food_radius)
 
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
@@ -105,7 +105,7 @@ while running:
 
 
     # TODO: increment score when eat the things
-    if center_tup[0] == current_snake[0][0] and center_tup[1] == current_snake[0][1]:
+    if circle.center[0] == current_snake[0][0] and circle.center[1] == current_snake[0][1]:
 
 
 
