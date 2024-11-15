@@ -37,15 +37,17 @@ current_snake = [[100-28, 100],
 
 # food dimensions
 food_radius = 5
+food_position = [200, 200]
 food_available = False
 
 # have 'food' randomly appear within the bounds of the walls
 def spawn_food():
-    points = [random.randint(0, window_x), random.randint(0, window_y)]
-    crect = pygame.Rect(points[0] - food_radius, points[1] - food_radius,
-                        food_radius * 2, food_radius * 2)
+    food_position = [random.randint(food_radius, window_x - food_radius), random.randint(food_radius, window_y - food_radius)]
+    # crect = pygame.Rect(points[0], points[1],
+    #                     food_radius * 2, food_radius * 2)
+    pygame.draw.circle(game_window, (0, 255, 0), food_position, food_radius)
     # pygame.draw.circle(game_window, (0, 255, 0), crect.center, food_radius)
-    return crect
+    # return crect
 
 
 # Main Function
@@ -72,20 +74,23 @@ while running:
     if direction == "RIGHT":
         snake_x += 7
 
+    spawn_food()
 
     # let it get longer
     snake_position = [snake_x, snake_y]
     current_snake.insert(0, list(snake_position))
+    if snake_position[0] == food_position[0] and snake_position[1] == food_position[1]:
+        score += 1
+    else:
+        current_snake.pop()
 
     game_window.fill((0, 0, 0))
 
-    current_snake.pop()
-
     # function
-    if not food_available:
-        circle = spawn_food()
-        pygame.draw.circle(game_window, (0, 255, 0), circle.center, food_radius)
-        food_available = True
+    # if not food_available:
+    #     circle = spawn_food()
+    #     pygame.draw.circle(game_window, (0, 255, 0), circle.center, food_radius)
+    #     food_available = True
 
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
