@@ -20,6 +20,9 @@ score = 0
 #clock
 clock = pygame.time.Clock()
 
+#font
+font = pygame.font.Font(None, 36)
+
 #initial running status
 running = True
 
@@ -79,6 +82,7 @@ while running:
         food_available = False
     else:
         current_snake.pop()
+
     if not food_available:
         food_position = [random.randrange(food_size, (window_x // 10)) * 10,
                          random.randrange(food_size, (window_y // 10)) * 10]
@@ -107,6 +111,8 @@ while running:
 
 
     # TODO: display score
+    scoreText = font.render(f"Score: {score}", True, (152, 108, 106))
+    game_window.blit(scoreText, (10, 10))
 
 
     for event in pygame.event.get():
@@ -116,7 +122,7 @@ while running:
 
     # Refresh game screen
     pygame.display.update()
-    clock.tick(30)
+    clock.tick(15)
 
 # TODO: end screen
 
