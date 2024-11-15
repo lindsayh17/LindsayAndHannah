@@ -38,14 +38,16 @@ current_snake = [[100-28, 100],
 # food dimensions
 food_radius = 5
 food_available = False
+food_position = [random.randrange(1, (window_x//10)) * 10,
+                  random.randrange(1, (window_y//10)) * 10]
 
 # have 'food' randomly appear within the bounds of the walls
-def spawn_food():
-    points = [random.randint(0, window_x), random.randint(0, window_y)]
-    crect = pygame.Rect(points[0] - food_radius, points[1] - food_radius,
-                        food_radius * 2, food_radius * 2)
+#def spawn_food():
+#    points = [random.randint(0, window_x), random.randint(0, window_y)]
+#    crect = pygame.Rect(points[0] - food_radius, points[1] - food_radius,
+#                        food_radius * 2, food_radius * 2)
     # pygame.draw.circle(game_window, (0, 255, 0), crect.center, food_radius)
-    return crect
+#    return crect
 
 
 # Main Function
