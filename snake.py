@@ -100,7 +100,7 @@ while running:
         food_position[0], food_position[1], food_size, food_size))
 
     # set up bounds for walls
-    if snake_y < 0 or snake_y > window_y or snake_x > window_x or snake_x < 0:
+    if snake_y < 0 or snake_y > window_y - 10 or snake_x > window_x - 10 or snake_x < 0:
         running = False
 
     # set up bounds for snake itself
