@@ -37,13 +37,15 @@ current_snake = [[100-28, 100],
 
 # food dimensions
 food_radius = 5
+food_available = False
 
 # have 'food' randomly appear within the bounds of the walls
 def spawn_food():
     points = [random.randint(0, window_x), random.randint(0, window_y)]
     crect = pygame.Rect(points[0] - food_radius, points[1] - food_radius,
                         food_radius * 2, food_radius * 2)
-    pygame.draw.circle(game_window, (0, 255, 0), crect.center, food_radius)
+    # pygame.draw.circle(game_window, (0, 255, 0), crect.center, food_radius)
+    return crect
 
 
 # Main Function
@@ -80,7 +82,9 @@ while running:
     current_snake.pop()
 
     # function
-    spawn_food()
+
+    circle = spawn_food()
+    pygame.draw.circle(game_window, (0, 255, 0), circle.center, food_radius)
 
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
@@ -101,7 +105,8 @@ while running:
 
 
     # TODO: increment score when eat the things
-    #if
+    if center_tup[0] == current_snake[0][0] and center_tup[1] == current_snake[0][1]:
+
 
 
     for event in pygame.event.get():
