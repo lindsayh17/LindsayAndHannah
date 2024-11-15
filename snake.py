@@ -29,7 +29,7 @@ snake_x = 100
 snake_y = 100
 snake_position = [snake_x, snake_y]
 # start snake at 100, 100
-current_snake = [[100-7, 100], [100, 100]]
+current_snake = [[100-14, 100], [100-7, 100], [100, 100]]
 
 # food dimensions
 food_radius = 5
@@ -62,16 +62,13 @@ while running:
     snake_position = [snake_x, snake_y]
     current_snake.insert(0, list(snake_position))
 
-    for x in current_snake:
-        snake = pygame.Rect(x[0], x[1], 7, 7)
-        pygame.draw.rect(game_window, (255, 0, 0), snake)
+    game_window.fill((0, 0, 0))
 
     current_snake.pop()
 
-    # gets rid of snake body by setting it to the background color
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
-        pygame.draw.rect(game_window, (0, 0, 0), snake)
+        pygame.draw.rect(game_window, (255, 0, 0), snake)
 
     # TODO: let it get longer
 
