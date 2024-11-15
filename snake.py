@@ -85,6 +85,7 @@ while running:
     if not food_available:
         circle = spawn_food()
         pygame.draw.circle(game_window, (0, 255, 0), circle.center, food_radius)
+        food_available = True
 
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
@@ -106,6 +107,7 @@ while running:
 
     # TODO: increment score when eat the things
     if circle.center[0] == current_snake[0][0] and circle.center[1] == current_snake[0][1]:
+        food_available = False
 
 
 
