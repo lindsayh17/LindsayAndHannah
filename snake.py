@@ -74,7 +74,7 @@ while running:
         food_position[0], food_position[1], food_size, food_size))
 
     # TODO: increment score when eat the things
-    if food_position[0] == current_snake[-1][0] and food_position[1] == current_snake[-1][1]:
+    if food_position[0] == current_snake[0][0] and food_position[1] == current_snake[0][1]:
         score += 1
         food_available = False
     else:
