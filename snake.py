@@ -104,7 +104,6 @@ while running:
     # TODO: display score
 
 
-
     # TODO: increment score when eat the things
     if circle.center[0] == current_snake[0][0] and circle.center[1] == current_snake[0][1]:
         food_available = False
