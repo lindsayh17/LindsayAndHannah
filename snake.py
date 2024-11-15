@@ -29,10 +29,21 @@ snake_x = 100
 snake_y = 100
 snake_position = [snake_x, snake_y]
 # start snake at 100, 100
-current_snake = [[100-14, 100], [100-7, 100], [100, 100]]
+current_snake = [[100-28, 100],
+                 [100-21, 100],
+                 [100-14, 100],
+                 [100-7, 100],
+                 [100, 100]]
 
 # food dimensions
 food_radius = 5
+
+# have 'food' randomly appear within the bounds of the walls
+def spawn_food():
+    points = [random.randint(0, window_x), random.randint(0, window_y)]
+    crect = pygame.Rect(points[0] - food_radius, points[1] - food_radius,
+                        food_radius * 2, food_radius * 2)
+    pygame.draw.circle(game_window, (0, 255, 0), crect.center, food_radius)
 
 
 # Main Function
@@ -59,6 +70,8 @@ while running:
     if direction == "RIGHT":
         snake_x += 7
 
+
+    # let it get longer
     snake_position = [snake_x, snake_y]
     current_snake.insert(0, list(snake_position))
 
@@ -66,11 +79,12 @@ while running:
 
     current_snake.pop()
 
+    # function
+    spawn_food()
+
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
         pygame.draw.rect(game_window, (255, 0, 0), snake)
-
-    # TODO: let it get longer
 
 
     # set up bounds for walls
@@ -78,6 +92,9 @@ while running:
         running = False
 
     # TODO: set up bounds for snake itself
+    for block in current_snake[1:]:
+        if snake_x == block[0] and snake_y == block[1]:
+            running = False
 
     # TODO: display score
 
@@ -99,10 +116,3 @@ while running:
 # TODO: end screen
 
 pygame.quit()
-
-# have 'food' randomly appear within the bounds of the walls
-def spawn_food():
-    points = [random.randint(0, window_x), random.randint(0, window_y)]
-    crect = pygame.Rect(points[0] - food_radius, points[1] - food_radius,
-                        food_radius * 2, food_radius * 2)
-    pygame.draw.circle(game_window, (0, 255, 0), crect.center, food_radius)
