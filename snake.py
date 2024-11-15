@@ -41,15 +41,6 @@ food_available = False
 food_position = [random.randrange(1, (window_x//10)) * 10,
                   random.randrange(1, (window_y//10)) * 10]
 
-# have 'food' randomly appear within the bounds of the walls
-#def spawn_food():
-#    points = [random.randint(0, window_x), random.randint(0, window_y)]
-#    crect = pygame.Rect(points[0] - food_radius, points[1] - food_radius,
-#                        food_radius * 2, food_radius * 2)
-    # pygame.draw.circle(game_window, (0, 255, 0), crect.center, food_radius)
-#    return crect
-
-
 # Main Function
 while running:
 
@@ -79,39 +70,43 @@ while running:
     snake_position = [snake_x, snake_y]
     current_snake.insert(0, list(snake_position))
 
+    pygame.draw.rect(game_window, (0, 255, 0), pygame.Rect(
+        food_position[0], food_position[1], food_size, food_size))
+
+    # TODO: increment score when eat the things
+    if food_position[0] == current_snake[-1][0] and food_position[1] == current_snake[-1][1]:
+        score += 1
+        food_available = False
+    else:
+        current_snake.pop()
+    if not food_available:
+        food_position = [random.randrange(1, (window_x // 10)) * 10,
+                         random.randrange(1, (window_y // 10)) * 10]
+    food_available = True
+
     game_window.fill((0, 0, 0))
 
-    current_snake.pop()
-
+    # redraw snake
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
         pygame.draw.rect(game_window, (255, 0, 0), snake)
 
+    # new food
+    pygame.draw.rect(game_window, (0, 255, 0), pygame.Rect(
+        food_position[0], food_position[1], food_size, food_size))
 
     # set up bounds for walls
     if snake_y < 0 or snake_y > window_y or snake_x > window_x or snake_x < 0:
         running = False
 
-    # TODO: set up bounds for snake itself
+    # set up bounds for snake itself
     for block in current_snake[1:]:
         if snake_x == block[0] and snake_y == block[1]:
             running = False
 
+
+
     # TODO: display score
-
-
-
-    pygame.draw.rect(game_window, (0, 255, 0), pygame.Rect(
-        food_position[0], food_position[1], food_size, food_size))
-
-    # TODO: increment score when eat the things
-    if food_position[0] == snake_position[0] and food_position[1] == snake_position[1]:
-        score += 1
-        food_available = False
-    if not food_available:
-        food_position = [random.randrange(1, (window_x // 10)) * 10,
-                          random.randrange(1, (window_y // 10)) * 10]
-    food_available = True
 
 
     for event in pygame.event.get():
