@@ -36,7 +36,7 @@ current_snake = [[100-28, 100],
                  [100, 100]]
 
 # food dimensions
-food_radius = 5
+food_size = 10
 food_available = False
 food_position = [random.randrange(1, (window_x//10)) * 10,
                   random.randrange(1, (window_y//10)) * 10]
@@ -83,12 +83,6 @@ while running:
 
     current_snake.pop()
 
-    # function
-    if not food_available:
-        circle = spawn_food()
-        pygame.draw.circle(game_window, (0, 255, 0), circle.center, food_radius)
-        food_available = True
-
     for x in current_snake:
         snake = pygame.Rect(x[0], x[1], 7, 7)
         pygame.draw.rect(game_window, (255, 0, 0), snake)
@@ -106,10 +100,18 @@ while running:
     # TODO: display score
 
 
-    # TODO: increment score when eat the things
-    if circle.center[0] == current_snake[0][0] and circle.center[1] == current_snake[0][1]:
-        food_available = False
 
+    pygame.draw.rect(game_window, (0, 255, 0), pygame.Rect(
+        food_position[0], food_position[1], food_size, food_size))
+
+    # TODO: increment score when eat the things
+    if food_position[0] == snake_position[0] and food_position[1] == snake_position[1]:
+        score += 1
+        food_available = False
+    if not food_available:
+        food_position = [random.randrange(1, (window_x // 10)) * 10,
+                          random.randrange(1, (window_y // 10)) * 10]
+    food_available = True
 
 
     for event in pygame.event.get():
