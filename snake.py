@@ -75,7 +75,7 @@ while running:
     if direction == "RIGHT":
         snake_x += 10
 
-
+    """------- FOOD AND GROWTH STUFF -------"""
     # let it get longer
     snake_position = [snake_x, snake_y]
     current_snake.insert(0, list(snake_position))
@@ -101,6 +101,7 @@ while running:
                          random.randrange(food_size, (window_y // 10)) * 10]
     food_available = True
 
+    """------- ACTUALLY DRAWING SNAKE (?) -------"""
     # reset the window
     game_window.fill(black)
 
@@ -113,6 +114,7 @@ while running:
     pygame.draw.rect(game_window, green, pygame.Rect(
         food_position[0], food_position[1], food_size, food_size))
 
+    """------- BOUNDS FOR THE SNAKE'S MOVEMENT -------"""
     # set up bounds for walls
     if snake_y < 0 or snake_y > window_y - 10 or snake_x > window_x - 10 or snake_x < 0:
         running = False
@@ -122,10 +124,10 @@ while running:
         if snake_x == block[0] and snake_y == block[1]:
             running = False
 
-
+    """------- SCORE STUFF -------"""
 
     # display score
-    scoreText = font.render(f"Score: {score}", True, (152, 108, 106))
+    scoreText = font.render(f"Score: {score}", True, dusty_pink)
     game_window.blit(scoreText, (10, 10))
 
 
@@ -134,12 +136,13 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    """------- HAVE GAME SCREEN RESET SO SNAKE SLOWS -------"""
     # Refresh game screen
     pygame.display.update()
     clock.tick(15)
 
 # end screen
-
+"""------- END SCREEN -------"""
 game_window.fill(navy)
 
 endText = font.render("Game Over", True, dusty_pink)
@@ -151,6 +154,8 @@ finalScoreText = font.render(f"Score: {score}", True, dusty_pink)
 game_window.blit(finalScoreText, (window_x // 2
                         - finalScoreText.get_width() // 2, window_y // 2 + 10))
 
+
+"""------- DON'T FORGET TO INCLUDE PYGAME.DISPLAY.FLIP! -------"""
 pygame.display.flip()
 time.sleep(10)
 pygame.quit()
