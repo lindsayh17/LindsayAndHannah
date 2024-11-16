@@ -4,8 +4,8 @@ import time
 import random
 
 # Window size
-window_x = 720
-window_y = 480
+window_x = 300
+window_y = 300
 
 # Initializing pygame
 pygame.init()
